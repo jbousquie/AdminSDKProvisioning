@@ -24,6 +24,11 @@ new_user = myapps.create_user( first_name: "zorro", family_name: "delavega", ema
 # groups
 new_group = myapps.create_group(email: "sgt.garcia@mydomain.com", name: "Garcia", description: "Sergent Garcia Fan Club")
 group = myapps.retrieve_group("sgt.garcia@mydomain.com")
+
+
+# members
+new_member = myapps.insert_group_member(group_email: "sgt.garcia@mydomain.com", email: "zorro@mydomain.com")
+pp new_member
 ```
 
 

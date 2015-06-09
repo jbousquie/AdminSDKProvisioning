@@ -11,6 +11,8 @@
 # Migrating from Provisioning to Directory API : https://developers.google.com/admin-sdk/directory/v1/guides/migrate
 #
 # Scopes : https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
+#
+# Help : http://thomasleecopeland.com/2015/04/27/google-directory-api-ruby-client.html
 
 
 module AdminSDKProvisioning # :nodoc
@@ -273,7 +275,18 @@ module AdminSDKProvisioning # :nodoc
 		def delete_group_member()
 		end
 
-		def insert_group_member()
+		# insert_group_member(group_email: email_of_the_group, email: member_email)
+		def insert_group_member(**args)
+			new_member = @api.members.insert.request_schema.new({
+				'email' => args[:email],
+				'role' => 'MEMBER'
+				})
+			res = @client.execute(
+				:api_method => @api.members.insert,
+				:parameters => {'groupKey' => args[:group_email]},
+				:body_object => new_member
+				)
+			return unJSON(res.body)
 		end
 
 		def list_group_members()
