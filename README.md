@@ -26,3 +26,6 @@ new_group = myapps.create_group(email: "sgt.garcia@mydomain.com", name: "Garcia"
 group = myapps.retrieve_group("sgt.garcia@mydomain.com")
 ```
 
+
+How to enable Google Apps Admin SDK for your domain *(in french)* : http://wiki.bousquie.fr/Home/activation-api-google-admin-sdk-pour-google-apps
+
