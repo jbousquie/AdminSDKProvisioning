@@ -34,3 +34,5 @@ pp new_member
 
 How to enable Google Apps Admin SDK for your domain *(in french)* : http://wiki.bousquie.fr/Home/activation-api-google-admin-sdk-pour-google-apps
 
+
+Licence WTFPL
