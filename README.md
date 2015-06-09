@@ -3,7 +3,7 @@ Ruby high-level client library for Google Apps Provisioning
 
 *Requires google/api Ruby gem*
 
-This library provides high-level command to manage Google Apps users, groups, and members.
+This library provides high-level commands to manage Google Apps users, groups, and members.
 
 Exemple :    
 ```ruby
