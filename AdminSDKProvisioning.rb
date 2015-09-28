@@ -212,6 +212,7 @@ module AdminSDKProvisioning # :nodoc
 
 		# https://developers.google.com/admin-sdk/directory/v1/guides/manage-users#update_user
 		def update_user(userKey, args)
+			args["userKey"] = userKey
 			res = @client.execute(
 				:api_method => @api.users.update,
 				:parameters => args
