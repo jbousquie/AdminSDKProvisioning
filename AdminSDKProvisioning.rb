@@ -7,6 +7,7 @@
 # Google API Ruby client library doc : http://www.rubydoc.info/github/google/google-api-ruby-client/Google/APIClient
 #
 # Admin Directory API Ruby client library : https://developers.google.com/api-client-library/ruby/apis/admin/directory_v1
+# Admin Directory API Ruby client librairy reference : http://www.rubydoc.info/github/google/google-api-ruby-client/Google/Apis/AdminDirectoryV1
 #
 # Migrating from Provisioning to Directory API : https://developers.google.com/admin-sdk/directory/v1/guides/migrate
 #
@@ -181,6 +182,7 @@ module AdminSDKProvisioning # :nodoc
 	 	#
 	 	# 			:suspended => <i>(boolean)</i> indicates if the user is suspended
 	 	# 
+
 	 	# api documentation here  : https://developers.google.com/admin-sdk/directory/v1/reference/users/insert?hl=fr
 		def create_user(**args)
 			new_user = @api.users.insert.request_schema.new({
@@ -193,7 +195,7 @@ module AdminSDKProvisioning # :nodoc
 					'externalIds' => :externalIds_array,
 					#'hashFunction' => :hash_function,
 					'ims' => :ims_array,
-					'includeInGlobalAddressList' => :global_address_list_included,
+					'includeInGlobalAddressList' => args[:includeInGlobalAddressList],
 					'ipWhitelisted' => :ip_whitelisted,
 					#'orgUnitPath' => :organization_path,
 					'organizations' => :organizations_array,
@@ -208,10 +210,19 @@ module AdminSDKProvisioning # :nodoc
   			return unJSON(res.body) 			
 		end
 
+		# https://developers.google.com/admin-sdk/directory/v1/guides/manage-users#update_user
+		def update_user(userKey, args)
+			res = @client.execute(
+				:api_method => @api.users.update,
+				:parameters => args
+				)
+			ret = res.body.empty? ? "" : unJSON(res.body)
+			return ret
+		end
 
 
 		def delete_user(userKey)
-			res = @lcient.execute(
+			res = @client.execute(
 				:api_method => @api.users.delete,
 				:parameters => {'userKey' => userKey}
 				)
