@@ -212,10 +212,12 @@ module AdminSDKProvisioning # :nodoc
 
 		# https://developers.google.com/admin-sdk/directory/v1/guides/manage-users#update_user
 		def update_user(userKey, args)
-			args["userKey"] = userKey
+
+			body = @api.users.insert.request_schema.new(args)
 			res = @client.execute(
 				:api_method => @api.users.update,
-				:parameters => args
+				:parameters => {'userKey' => userKey},
+				:body_object => body
 				)
 			ret = res.body.empty? ? "" : unJSON(res.body)
 			return ret
