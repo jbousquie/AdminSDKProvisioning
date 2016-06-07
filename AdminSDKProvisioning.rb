@@ -284,6 +284,7 @@ module AdminSDKProvisioning # :nodoc
 
 
 		# Members
+		# https://developers.google.com/admin-sdk/directory/v1/guides/manage-group-members
 		# ======================================
 
 		def delete_group_member()
@@ -306,6 +307,23 @@ module AdminSDKProvisioning # :nodoc
 		def list_group_members()
 		end
 
+		# retrieve all members from a group
+		def retrieve_all_members(groupKey)
+			emails = []
+			next_page = nil
+			begin
+				res = @client.execute(
+					:api_method => @api.members.get,
+					:parameters => { 'groupKey' => groupKey, 'memberKey' => nil, 'pageToken' => next_page })
+				body = unJSON(res.body)
+				members = body[:members]
+				members.each {|m| 
+					emails.push(m[:email])
+				}
+				next_page = body[:nextPageToken]
+			end while next_page
+			return emails
+		end
 
 
 	end
